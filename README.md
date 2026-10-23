@@ -40,24 +40,24 @@ features/             # Gherkin feature files for BDD scenarios
 ```
 
 ## Design decisions
--- registration and vehicle are frozen data classes
--- Register and vehicles registry are hsoted in separate classes , the vehicle registry being encapsulated into the register
--- demo.py provides a sample run through of how the code will should be used
+registration and vehicle are frozen data classes
+Register and vehicles registry are hsoted in separate classes , the vehicle registry being encapsulated into the register
+demo.py provides a sample run through of how the code will should be used
 
 ## Testing approach
--- unit tests for each class method
--- unit tests for possible anomalies that could occur
--- BDD test cases to test features as specified in the requirements
+unit tests for each class method
+unit tests for possible anomalies that could occur
+BDD test cases to test features as specified in the requirements
 
 ## Assumptions and limitations
--- as specified in the requirements no persistance or user interface developed
+As specified in the requirements no persistance or user interface developed
 
 ## Next steps
--- Interview discussion
+Interview discussion
 
 ## GAI disclosure
--- Whereas I've written many python scripts before, these were adhoc. For this work I wanted to learn how to create
--- production ready python and to use python tooling such as pylance, ruff, mypy.
--- claude was used to create the VSCODE config and the project scaffolding such as CI/CD, .gitignore and pyrproject.toml
--- provided code reviews and knowledge regards pytest-bdd
--- soloution classes, features, unit tests, BDD feature file and steps, the demo and the test_demo - including sample data were created by myself.
+Whereas I've written many python scripts before, these were adhoc. For this work I wanted to learn how to create
+production ready python and to use python tooling such as pylance, ruff, mypy.
+claude was used to create the VSCODE config and the project scaffolding such as CI/CD, .gitignore and pyrproject.toml
+provided code reviews and knowledge regards pytest-bdd
+soloution classes, features, unit tests, BDD feature file and steps, the demo and the test_demo - including sample data were created by myself.
