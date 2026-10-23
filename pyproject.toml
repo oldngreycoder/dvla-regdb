@@ -1,0 +1,21 @@
+[project]
+name = "dvla-regdb"
+version = "0.1.0"
+requires-python = ">=3.12"
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-bdd", "pytest-cov", "ruff", "mypy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+bdd_features_base_dir = "features"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]   # errors, pyflakes, imports, modernise, bugbear
+
+[tool.mypy]
+strict = true

@@ -1,0 +1,36 @@
+
+# --- Testing core ---
+pytest
+pytest-cov
+pytest-mock
+pytest-xdist
+hypothesis
+
+# --- BDD ---
+pytest-bdd
+
+# --- API / HTTP testing ---
+requests
+httpx
+responses
+respx
+jsonschema
+pydantic
+
+# --- UI automation ---
+pytest-playwright
+selenium
+
+# --- Test data ---
+faker
+factory_boy
+
+# --- Code quality ---
+ruff
+black
+mypy
+pre-commit
+
+# --- Multi-env runners ---
+tox
+nox

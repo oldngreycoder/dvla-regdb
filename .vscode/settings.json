@@ -1,0 +1,42 @@
+{
+  // --- Interpreter: always use the project venv ---
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+
+  // --- Testing: pytest (also picks up pytest-bdd scenarios) ---
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": ["tests"],
+
+  // --- Formatting + linting: Ruff on save ---
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "never",
+      "source.organizeImports.ruff": "explicit"
+    },
+    "editor.rulers": [88]
+  },
+
+  // --- Type checking ---
+  "python.analysis.typeCheckingMode": "standard",
+  "python.analysis.extraPaths": ["${workspaceFolder}/src"],
+  "mypy-type-checker.importStrategy": "fromEnvironment",
+
+  // --- Gherkin feature files (Cucumber extension) ---
+  "cucumber.features": ["features/**/*.feature", "tests/**/*.feature"],
+  "cucumber.glue": ["tests/**/*.py"],
+
+  // --- Hide noise ---
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
+    "**/*.egg-info": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "python-envs.defaultEnvManager": "ms-python.python:venv"
+}

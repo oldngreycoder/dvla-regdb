@@ -1,0 +1,30 @@
+# Virtual environment
+.venv/
+venv/
+
+# Bytecode
+__pycache__/
+*.py[cod]
+
+# Tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# Editors / OS
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Assessment brief (keep out of the public repo)
+*.doc
+*.docx
