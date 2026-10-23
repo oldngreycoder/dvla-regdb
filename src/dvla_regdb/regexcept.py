@@ -16,3 +16,7 @@ class VehicleRegistrationExistsError(VehicleRegisterError):
 
 class VehicleRegistrationNotFoundError(VehicleRegisterError, LookupError):
     """Vehicle registration not found in the vehicle registrations datastore"""
+
+
+class VehicleRegistrationInputError(VehicleRegisterError):
+    """Vehicle registration failed validation check"""

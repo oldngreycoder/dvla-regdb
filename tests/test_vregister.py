@@ -1,5 +1,9 @@
 import pytest
 
+from dvla_regdb.regexcept import (
+    VehicleRegistrationExistsError,
+    VehicleRegistrationNotFoundError,
+)
 from dvla_regdb.register import VRegister
 from dvla_regdb.vehicle import Vehicle
 
@@ -17,48 +21,72 @@ def vehicle_register() -> VRegister:
 class TestVRegistry:
     def test_insert_registration(self, vehicle_register: VRegister) -> None:
 
-        vrgstrn_AB01_CDE = vehicle_register.find_registration("AB01 CDE")
-        vrgstrn_FG02_HJK = vehicle_register.find_registration("FG02 HJK")
-        rgstrn_L33T_H4X0R = vehicle_register.find_registration("L33T H4X0R")
+        vAB01_CDE = vehicle_register.find_registration("AB01 CDE")
+        vFG02_HJK = vehicle_register.find_registration("FG02 HJK")
+        vL33T_H4X0R = vehicle_register.find_registration("L33T H4X0R")
 
         assert (
-            vrgstrn_AB01_CDE.registration_id == "AB01 CDE"
-            and vrgstrn_AB01_CDE.year == 2001
-            and vrgstrn_AB01_CDE.vehicle == Vehicle("12345")
+            vAB01_CDE.registration_id == "AB01 CDE"
+            and vAB01_CDE.year == 2001
+            and vAB01_CDE.vehicle == Vehicle("12345")
         )
 
         assert (
-            vrgstrn_FG02_HJK.registration_id == "FG02 HJK"
-            and vrgstrn_FG02_HJK.year == 2002
-            and vrgstrn_FG02_HJK.vehicle == Vehicle("67890")
+            vFG02_HJK.registration_id == "FG02 HJK"
+            and vFG02_HJK.year == 2002
+            and vFG02_HJK.vehicle == Vehicle("67890")
         )
 
         assert (
-            rgstrn_L33T_H4X0R.registration_id == "L33T H4X0R"
-            and rgstrn_L33T_H4X0R.year == 2022
-            and rgstrn_L33T_H4X0R.vehicle is None
+            vL33T_H4X0R.registration_id == "L33T H4X0R"
+            and vL33T_H4X0R.year == 2022
+            and vL33T_H4X0R.vehicle is None
         )
 
     def test_find_vehicle_registration(self, vehicle_register: VRegister) -> None:
-        vrgstrn_AB01_CDE = vehicle_register.find_registration("AB01 CDE")
-        vrgstrn_FG02_HJK = vehicle_register.find_registration("FG02 HJK")
+        vAB01_CDE = vehicle_register.find_registration("AB01 CDE")
+        vFG02_HJK = vehicle_register.find_registration("FG02 HJK")
 
         assert (
-            vrgstrn_AB01_CDE.registration_id == "AB01 CDE"
-            and vrgstrn_AB01_CDE.year == 2001
-            and vrgstrn_AB01_CDE.vehicle == Vehicle("12345")
+            vAB01_CDE.registration_id == "AB01 CDE"
+            and vAB01_CDE.year == 2001
+            and vAB01_CDE.vehicle == Vehicle("12345")
         )
 
         assert (
-            vrgstrn_FG02_HJK.registration_id == "FG02 HJK"
-            and vrgstrn_FG02_HJK.year == 2002
-            and vrgstrn_FG02_HJK.vehicle == Vehicle("67890")
+            vFG02_HJK.registration_id == "FG02 HJK"
+            and vFG02_HJK.year == 2002
+            and vFG02_HJK.vehicle == Vehicle("67890")
         )
 
     def test_find_registration(self, vehicle_register: VRegister) -> None:
-        rgstrn_L33T_H4X0R = vehicle_register.find_registration("L33T H4X0R")
+        vL33T_H4X0R = vehicle_register.find_registration("L33T H4X0R")
         assert (
-            rgstrn_L33T_H4X0R.registration_id == "L33T H4X0R"
-            and rgstrn_L33T_H4X0R.year == 2022
-            and rgstrn_L33T_H4X0R.vehicle is None
+            vL33T_H4X0R.registration_id == "L33T H4X0R"
+            and vL33T_H4X0R.year == 2022
+            and vL33T_H4X0R.vehicle is None
         )
+
+    def test_len(self, vehicle_register: VRegister) -> None:
+        assert len(vehicle_register) == 3
+
+    def test_reg_with_vehicle(self, vehicle_register: VRegister) -> None:
+        vFG02_HJK = vehicle_register.find_vehicle_id_for_registration("FG02 HJK")
+        assert vFG02_HJK == "67890"
+
+    def test_reg_no_vehicle(self, vehicle_register: VRegister) -> None:
+        vL33T_H4X0R = vehicle_register.find_vehicle_id_for_registration("L33T H4X0R")
+        assert vL33T_H4X0R is None
+
+    def test_reg_unknown(self, vehicle_register: VRegister) -> None:
+        with pytest.raises(VehicleRegistrationNotFoundError):
+            vehicle_register.find_vehicle_id_for_registration("unknown")
+
+    def test_duplicate_registration(self, vehicle_register: VRegister) -> None:
+        with pytest.raises(VehicleRegistrationExistsError):
+            vehicle_register.insert_vehicle_registration("AB01 CDE", 2001, "12345")
+
+    def test_half_insert(self, vehicle_register: VRegister) -> None:
+        with pytest.raises(VehicleRegistrationExistsError):
+            vehicle_register.insert_vehicle_registration("AB01 CDE", 2001, "99999")
+        assert not vehicle_register.has_vehicle("99999")

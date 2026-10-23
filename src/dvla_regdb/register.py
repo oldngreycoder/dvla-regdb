@@ -12,16 +12,19 @@ class VRegister:
         self._register_store: dict[str, Registration] = {}
         self._vehicle_registry = VRegistry()
 
+    def __len__(self) -> int:
+        return len(self._register_store)
+
     def insert_vehicle_registration(
         self, registration_id: str, year: int, vehicle_id: str
     ) -> None:
-        if vehicle_id not in self._vehicle_registry:
-            vehicle = Vehicle(vehicle_id)
-            self._vehicle_registry.insert_vehicle(vehicle)
         if registration_id in self._register_store:
             raise VehicleRegistrationExistsError(
                 f"Vehicle Registration {registration_id!r} exists!."
             )
+        if vehicle_id not in self._vehicle_registry:
+            vehicle = Vehicle(vehicle_id)
+            self._vehicle_registry.insert_vehicle(vehicle)
         registration = Registration(
             registration_id, year, self._vehicle_registry.find_vehicle(vehicle_id)
         )
@@ -42,8 +45,11 @@ class VRegister:
             )
         return self._register_store[registration_id]
 
-    def registrations(self) -> int:
-        return 0
+    def find_vehicle_id_for_registration(self, registration_id: str) -> str | None:
+        reg = self.find_registration(registration_id)
+        if reg.vehicle is None:
+            return None
+        return reg.vehicle.vehicle_id
 
-    def vehicle_registrations(self) -> int:
-        return 0
+    def has_vehicle(self, vid: str) -> bool:
+        return vid in self._vehicle_registry
