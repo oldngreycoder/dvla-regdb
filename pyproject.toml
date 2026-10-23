@@ -15,7 +15,7 @@ bdd_features_base_dir = "features"
 line-length = 88
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]   # errors, pyflakes, imports, modernise, bugbear
+select = ["E", "F", "I", "UP", "B", "ARG"]   # errors, pyflakes, imports, modernise, bugbear
 
 [tool.mypy]
 strict = true

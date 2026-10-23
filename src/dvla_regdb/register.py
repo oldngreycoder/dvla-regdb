@@ -53,3 +53,6 @@ class VRegister:
 
     def has_vehicle(self, vid: str) -> bool:
         return vid in self._vehicle_registry
+
+    def count(self) -> int:
+        return len(self._register_store)

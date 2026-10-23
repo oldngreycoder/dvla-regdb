@@ -67,8 +67,8 @@ class TestVRegistry:
             and vL33T_H4X0R.vehicle is None
         )
 
-    def test_len(self, vehicle_register: VRegister) -> None:
-        assert len(vehicle_register) == 3
+    def test_count(self, vehicle_register: VRegister) -> None:
+        assert vehicle_register.count() == 3
 
     def test_reg_with_vehicle(self, vehicle_register: VRegister) -> None:
         vFG02_HJK = vehicle_register.find_vehicle_id_for_registration("FG02 HJK")

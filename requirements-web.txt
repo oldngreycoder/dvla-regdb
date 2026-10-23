@@ -1,5 +1,0 @@
-# Optional web frameworks
-fastapi
-uvicorn[standard]
-flask
-django
