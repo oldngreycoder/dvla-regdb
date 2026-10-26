@@ -13,12 +13,22 @@ def register() -> VRegister:
 
 @when("I count the registrations", target_fixture="count")
 def count_registrations(register: VRegister) -> int:
-    return register.count()
+    return register.registrations()
 
 
 @then(parsers.parse("there are {expected:d} registrations"))
 def check_count(count: int, expected: int) -> None:
     assert count == expected
+
+
+@when("I accumulate the registration cost", target_fixture="total_cost")
+def accumulate_cost(register: VRegister) -> float:
+    return register.total_cost()
+
+
+@then(parsers.parse("the total cost is {expected:d}"))
+def check_cost(total_cost: float, expected: float) -> None:
+    assert total_cost == expected
 
 
 @then(parsers.parse('the vehicle_id is "{expected}"'))

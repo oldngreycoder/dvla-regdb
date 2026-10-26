@@ -20,3 +20,7 @@ class VehicleRegistrationNotFoundError(VehicleRegisterError, LookupError):
 
 class VehicleRegistrationInputError(VehicleRegisterError):
     """Vehicle registration failed validation check"""
+
+
+class VehicleIdSharingError(VehicleRegisterError):
+    """Vehicle registration failed validation check"""

@@ -14,13 +14,6 @@ def demo() -> None:
 
     print(f"There are {vregister.count()} registrations")
 
-    vid = vregister.find_registration("AB01 CDE")
-    if vid.vehicle is not None:
-        print(
-            f"Registration {vid.registration_id}  Year {vid.year} "
-            f"Id {vid.vehicle.vehicle_id}"
-        )
-
     print(f"Registration {'AB01 CDE'} has Id {find_vehicle_id(vregister, 'AB01 CDE')}")
 
     print(f"Registration {'FG02 HJK'} has Id {find_vehicle_id(vregister, 'FG02 HJK')}")
@@ -28,6 +21,8 @@ def demo() -> None:
     print(
         f"Registration {'L33T H4X0R'} has Id {find_vehicle_id(vregister, 'L33T H4X0R')}"
     )
+
+    print(f"Registration {'AG1L3'} has Id {find_vehicle_id(vregister, 'AG1L3')}")
 
 
 if __name__ == "__main__":

@@ -6,12 +6,15 @@ from dvla_regdb.vehicle import Vehicle
 
 @pytest.fixture
 def registration() -> Registration:
-    return Registration("AB01 CDE", 2001, Vehicle("12345"))
+    return Registration(
+        registration_id="AB01 CDE", year=2001, vehicle=Vehicle("12345"), cost=None
+    )
 
 
 class TestRegistration:
-    def test_registation_data_setup(self, registration: Registration) -> None:
+    def test_registration_data_setup(self, registration: Registration) -> None:
         assert registration.registration_id == "AB01 CDE"
         assert registration.year == 2001
         assert registration.vehicle is not None
         assert registration.vehicle == Vehicle("12345")
+        assert registration.cost is None
